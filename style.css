@@ -83,3 +83,7 @@ button,
 .right {
     cursor: pointer;
 }
+
+footer {
+    text-align: center;
+}

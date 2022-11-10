@@ -1,5 +1,6 @@
 
 function makeBoard(size = 16) {
+
     /*---if canvas already have squares then clear the canvas----*/
     let squares = document.querySelectorAll('.square-div');
     squares.forEach(div => div.remove());
@@ -20,7 +21,6 @@ function makeBoard(size = 16) {
 }
 
 function colorChange(e) {
-    squareVisitCount++;
     if (squareBgColor === 'random') {
         e.target.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
 
@@ -40,7 +40,7 @@ const eraserButton = document.querySelector('.eraser');
 
 let sliderValue = 16;
 let squareBgColor = "#000000";
-let squareVisitCount = 0;
+let click = true;
 
 /*---------------------slider value-----------------*/
 sliderLabel.textContent = `Size: ${sliderValue}X${sliderValue}`;
@@ -58,17 +58,29 @@ colorPicker.addEventListener('change', (e) => {
 /*-----Pick random color for grid-----------------*/
 randomButton.addEventListener('click', (e) => {
     squareBgColor = "random";
+    eraserButton.style.backgroundColor = 'rgb(202, 227, 241)';
+    clearButton.style.backgroundColor = 'rgb(202, 227, 241)';
+    randomButton.style.backgroundColor = 'rgb(46, 113, 152)';
+});
+
+/*-----Erase only the selected square-----------------*/
+eraserButton.addEventListener('click', (e) => {
+    squareBgColor = "#FFFFFF";
+    clearButton.style.backgroundColor = 'rgb(202, 227, 241)';
+    randomButton.style.backgroundColor = 'rgb(202, 227, 241)';
+    eraserButton.style.backgroundColor = 'rgb(46, 113, 152)';
 });
 
 /*-----clear the board-----------------*/
 clearButton.addEventListener('click', (e) => {
     let squares = document.querySelectorAll('.square-div');
     squares.forEach(square => square.style.backgroundColor = 'white');
+    randomButton.style.backgroundColor = 'rgb(202, 227, 241)';
+    eraserButton.style.backgroundColor = 'rgb(202, 227, 241)';
+    clearButton.style.backgroundColor = 'rgb(46, 113, 152)';
+
 });
-/*-----Erase only the selected square-----------------*/
-eraserButton.addEventListener('mouseover', (e) => {
-    squareBgColor = "#FFFFFF";
-});
+
+
 
 document.onload = makeBoard();
-
